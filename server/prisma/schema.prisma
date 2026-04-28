@@ -1,0 +1,231 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Models for Template Packs, which group multiple ReportTemplates
+model TemplatePack {
+  id          String             @id @default(cuid())
+  name        String             @unique
+  description String?
+  items       TemplatePackItem[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model TemplatePackItem {
+  id           String         @id @default(cuid())
+  packId       String
+  pack         TemplatePack   @relation(fields: [packId], references: [id], onDelete: Cascade)
+  templateId   String
+  template     ReportTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade) // A pack item points to a ReportTemplate
+  displayOrder Int
+
+  @@unique([packId, templateId])
+  @@unique([packId, displayOrder])
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+// Zod generator disabled - schemas not used in codebase
+// generator zod {
+//   provider = "prisma-zod-generator"
+//   output   = "../../src/generated/zod"
+//   createInputTypes = false
+//   createRelationValuesTypes = false
+//   createPartialTypes = false
+//   useMultipleFiles = false
+// }
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String      @id @default(cuid())
+  username     String      @unique // New field for login
+  name         String              // User's full name or display name
+  email        String?     @unique // User's email, remains unique but now optional
+  password     String
+  role         UserRole    @default(department)
+  department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  updatedSections ReportSection[]
+  reports      Report[]    @relation("ReportCreator")
+  reportTemplates ReportTemplate[]
+  sharedReportLinks SharedReportLink[]
+  reportImages ReportImage[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+enum UserRole {
+  secretary
+  department
+}
+
+model Department {
+  id                String            @id @default(cuid())
+  name              String            @unique
+  users             User[]
+  reportSections    ReportSection[]
+  templateSections  ReportTemplateSection[]
+  createdAt         DateTime                  @default(now())
+  updatedAt         DateTime                  @updatedAt
+}
+
+model Report {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  cycle       ReportCycle
+  dueAt       DateTime?
+  state       ReportState   @default(DRAFT)
+  type        ReportType    @default(OFFICIAL)
+  finalizedAt DateTime?
+  isDeleted   Boolean       @default(false)
+  templateId  String?       // Link to template used
+  template    ReportTemplate? @relation(fields: [templateId], references: [id])
+  sections    ReportSection[]
+  createdBy   User?         @relation("ReportCreator", fields: [createdById], references: [id])
+  createdById String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  sharedLinks SharedReportLink[]
+  reportImages ReportImage[]
+}
+
+enum ReportCycle {
+  WEEKLY
+  MONTHLY
+  ADHOC
+}
+
+enum ReportState {
+  DRAFT
+  FINAL
+  PUBLISHED
+}
+
+enum ReportType {
+  OFFICIAL
+  PERSONAL
+}
+
+enum SectionState {
+  DRAFT
+  SUBMITTED
+}
+
+model ReportSection {
+  id              String          @id @default(cuid())
+  report          Report          @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  reportId        String
+  sectionName     String          // Custom name given by secretary
+  instructions    String?         @db.Text // Optional instructions for department
+  departmentId    String?         // Optional — null for secretary personal notes
+  department      Department?     @relation(fields: [departmentId], references: [id])
+  state           SectionState    @default(DRAFT)
+  dueAt           DateTime?
+  displayOrder    Int             @default(0)
+  locked          Boolean         @default(false)
+  isActive        Boolean         @default(true)
+  contentMarkdown String?         @db.Text
+  submittedAt     DateTime?
+  updatedBy       User?           @relation(fields: [updatedById], references: [id])
+  updatedById     String?
+  updatedAt       DateTime        @updatedAt
+
+  // Link to the template section this report section was created from
+  reportTemplateSectionId String?                 
+  reportTemplateSection   ReportTemplateSection? @relation(fields: [reportTemplateSectionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([reportId, displayOrder])
+}
+
+model ReportTemplate {
+  id            String                    @id @default(cuid())
+  name          String                    @unique // Template name
+  description   String?
+  createdById   String
+  createdBy     User                      @relation(fields: [createdById], references: [id])
+  isActive      Boolean                   @default(true)
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  
+  sections      ReportTemplateSection[]
+  reports       Report[]
+  templatePackItems TemplatePackItem[] // Back-relation to TemplatePackItem
+}
+
+model ReportTemplateSection {
+  id            String          @id @default(cuid())
+  templateId    String
+  template      ReportTemplate  @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  sectionName   String          // Section name
+  instructions  String?         @db.Text // Default instructions
+  departmentId  String
+  department    Department      @relation(fields: [departmentId], references: [id])
+  displayOrder  Int
+
+  reportSections ReportSection[] // The actual report sections created from this template section
+  
+  @@unique([templateId, displayOrder])
+}
+
+// Shared report link for external sharing
+enum SharedReportAccess {
+  VIEW
+  COMMENT
+}
+
+model SharedReportLink {
+  id              String              @id @default(cuid())
+  report          Report              @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  reportId        String
+  snapshotJson    Json
+  accessLevel     SharedReportAccess
+  codeHash        String              // For authentication (bcrypt hash)
+  codeEncrypted   String              // For display purposes (AES encrypted)
+  expiresAt       DateTime?
+  createdBy       User                @relation(fields: [createdById], references: [id])
+  createdById     String
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@index([reportId])
+}
+
+// Global settings model for admin-controlled app-wide settings
+model GlobalSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String
+  updatedBy String
+  
+  @@map("global_settings")
+}
+
+// Model for tracking uploaded report images with resource identifiers
+model ReportImage {
+  id              String   @id @default(cuid())
+  reportId        String   // Links to Report
+  filename        String   // Secure filename on disk
+  originalName    String   // Original uploaded filename
+  mimeType        String   // image/png, image/jpeg, etc.
+  fileSize        Int      // File size in bytes
+  uploadedAt      DateTime @default(now())
+  uploadedById    String   // Who uploaded it
+  isActive        Boolean  @default(true)
+  
+  report          Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  uploadedBy      User     @relation(fields: [uploadedById], references: [id])
+  
+  @@unique([reportId, filename])
+  @@map("report_images")
+}

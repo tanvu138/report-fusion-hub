@@ -1,0 +1,118 @@
+# Report Fusion Hub — Production Docker Compose
+#
+# Usage:
+#   cp .env.example .env   # configure all required vars
+#   docker compose up -d   # start all services
+#   docker compose logs -f # follow logs
+#
+# First-time setup (after DB is healthy):
+#   docker compose exec backend npx prisma migrate deploy
+#   docker compose exec backend npm run seed
+
+services:
+  # --- Frontend (Nginx serving built static assets) ---
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8945}
+        VITE_DIFY_TOKEN: ${VITE_DIFY_TOKEN:-}
+        VITE_DIFY_BASE_URL: ${VITE_DIFY_BASE_URL:-}
+    ports:
+      - "${FRONTEND_PORT:-6234}:6234"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: "0.25"
+
+  # --- Backend (Node.js + Express + Prisma) ---
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-8945}:8945"
+    environment:
+      NODE_ENV: production
+      PORT: 8945
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      JWT_EXPIRY: ${JWT_EXPIRY:-12h}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-report_fusion_hub}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:6234}
+      FILE_ENCRYPTION_KEY: ${FILE_ENCRYPTION_KEY:?FILE_ENCRYPTION_KEY is required}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      - uploads:/app/secure_uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1.0"
+
+  # --- PostgreSQL Database ---
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-report_fusion_hub}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-report_fusion_hub}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "0.5"
+
+  # --- Database Backup (daily pg_dump via cron) ---
+  db-backup:
+    image: postgres:16-alpine
+    environment:
+      PGHOST: db
+      PGUSER: ${POSTGRES_USER:-postgres}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATABASE: ${POSTGRES_DB:-report_fusion_hub}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-30}
+    volumes:
+      - backups:/backups
+      - ./scripts/db-backup.sh:/usr/local/bin/db-backup.sh:ro
+      - ./scripts/db-restore.sh:/usr/local/bin/db-restore.sh:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        chmod +x /usr/local/bin/db-backup.sh
+        echo "0 2 * * * /usr/local/bin/db-backup.sh" | crontab -
+        echo "Backup scheduler started (daily at 02:00 UTC)"
+        crond -f -l 2
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.25"
+
+volumes:
+  pgdata:
+  uploads:
+  backups:

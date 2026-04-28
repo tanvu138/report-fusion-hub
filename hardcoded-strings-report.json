@@ -1,0 +1,2400 @@
+{
+  "totalFiles": 150,
+  "scannedFiles": 150,
+  "issuesFound": [
+    {
+      "file": "src/components/ErrorBoundary.tsx",
+      "line": 68,
+      "type": "message",
+      "text": "Application",
+      "context": "const formattedError = formatError(this.state.error, 'Application');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 51,
+      "type": "message",
+      "text": "Failed to update setting - setNavigationType returned false",
+      "context": "throw new Error('Failed to update setting - setNavigationType returned false');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 69,
+      "type": "jsx-text",
+      "text": "Navigation Settings",
+      "context": "<CardTitle>Navigation Settings</CardTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 70,
+      "type": "jsx-text",
+      "text": "Loading current settings...",
+      "context": "<CardDescription>Loading current settings...</CardDescription>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 75,
+      "type": "jsx-text",
+      "text": "Loading...",
+      "context": "<span>Loading...</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 134,
+      "type": "jsx-text",
+      "text": "About Navigation Types",
+      "context": "<CardTitle>About Navigation Types</CardTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 147,
+      "type": "jsx-text",
+      "text": "• Fixed header navigation",
+      "context": "<li>• Fixed header navigation</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 148,
+      "type": "jsx-text",
+      "text": "• Familiar desktop layout",
+      "context": "<li>• Familiar desktop layout</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 149,
+      "type": "jsx-text",
+      "text": "• Works well on wide screens",
+      "context": "<li>• Works well on wide screens</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 150,
+      "type": "jsx-text",
+      "text": "• Consistent with most web apps",
+      "context": "<li>• Consistent with most web apps</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 164,
+      "type": "jsx-text",
+      "text": "• More vertical space for content",
+      "context": "<li>• More vertical space for content</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 165,
+      "type": "jsx-text",
+      "text": "• Collapsible sidebar",
+      "context": "<li>• Collapsible sidebar</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 166,
+      "type": "jsx-text",
+      "text": "• Keyboard shortcuts (⌘B/Ctrl+B)",
+      "context": "<li>• Keyboard shortcuts (⌘B/Ctrl+B)</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 167,
+      "type": "jsx-text",
+      "text": "• Modern app interface",
+      "context": "<li>• Modern app interface</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 168,
+      "type": "jsx-text",
+      "text": "• Better for report editing",
+      "context": "<li>• Better for report editing</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 178,
+      "type": "jsx-text",
+      "text": "Navigation Usage",
+      "context": "<CardTitle>Navigation Usage</CardTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 185,
+      "type": "jsx-text",
+      "text": "This section will show:",
+      "context": "<p>This section will show:</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 187,
+      "type": "jsx-text",
+      "text": "• Active user sessions by navigation type",
+      "context": "<li>• Active user sessions by navigation type</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 188,
+      "type": "jsx-text",
+      "text": "• User satisfaction metrics",
+      "context": "<li>• User satisfaction metrics</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 189,
+      "type": "jsx-text",
+      "text": "• Performance impact analysis",
+      "context": "<li>• Performance impact analysis</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/admin/NavigationSettings.tsx",
+      "line": 190,
+      "type": "jsx-text",
+      "text": "• Accessibility compliance status",
+      "context": "<li>• Accessibility compliance status</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/analytics/CompletionTrends.tsx",
+      "line": 154,
+      "type": "jsx-text",
+      "text": "Loading chart...",
+      "context": "<div className=\"animate-pulse text-muted-foreground\">Loading chart...</div>",
+      "severity": "high",
+      "suggestion": "component.loading.chart"
+    },
+    {
+      "file": "src/components/layout/AppHeader.tsx",
+      "line": 49,
+      "type": "jsx-prop",
+      "text": "Main navigation",
+      "context": "<nav className=\"flex items-center gap-4\" role=\"navigation\" aria-label=\"Main navigation\">",
+      "severity": "high",
+      "suggestion": "component.main.navigation"
+    },
+    {
+      "file": "src/components/layout/AppSidebar.tsx",
+      "line": 103,
+      "type": "jsx-prop",
+      "text": "Main navigation",
+      "context": "aria-label=\"Main navigation\"",
+      "severity": "high",
+      "suggestion": "component.main.navigation"
+    },
+    {
+      "file": "src/components/layout/AppSidebar.tsx",
+      "line": 119,
+      "type": "jsx-prop",
+      "text": "TPG Reports Logo",
+      "context": "alt=\"TPG Reports Logo\"",
+      "severity": "high",
+      "suggestion": "component.tpg.reports.logo"
+    },
+    {
+      "file": "src/components/layout/Breadcrumbs.tsx",
+      "line": 133,
+      "type": "jsx-prop",
+      "text": "Dashboard",
+      "context": "aria-label=\"Dashboard\"",
+      "severity": "high",
+      "suggestion": "component.dashboard"
+    },
+    {
+      "file": "src/components/layout/MainLayout.tsx",
+      "line": 33,
+      "type": "jsx-text",
+      "text": "Loading application...",
+      "context": "<p className=\"text-sm text-muted-foreground\">Loading application...</p>",
+      "severity": "high",
+      "suggestion": "component.loading.application"
+    },
+    {
+      "file": "src/components/layout/MainLayout.tsx",
+      "line": 57,
+      "type": "jsx-prop",
+      "text": "Main content",
+      "context": "aria-label=\"Main content\"",
+      "severity": "high",
+      "suggestion": "component.main.content"
+    },
+    {
+      "file": "src/components/layout/MainLayout.tsx",
+      "line": 103,
+      "type": "jsx-prop",
+      "text": "Main content",
+      "context": "aria-label=\"Main content\"",
+      "severity": "high",
+      "suggestion": "component.main.content"
+    },
+    {
+      "file": "src/components/layout/MainLayout.tsx",
+      "line": 132,
+      "type": "jsx-text",
+      "text": "Navigation Error",
+      "context": "<h3 className=\"font-semibold text-destructive\">Navigation Error</h3>",
+      "severity": "high",
+      "suggestion": "component.navigation.error"
+    },
+    {
+      "file": "src/components/logic/DepartmentManager.tsx",
+      "line": 172,
+      "type": "message",
+      "text": "Department not found",
+      "context": "throw new Error('Department not found');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/DepartmentManager.tsx",
+      "line": 180,
+      "type": "message",
+      "text": "Please wait at least 1 hour between reminders",
+      "context": "throw new Error('Please wait at least 1 hour between reminders');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/DepartmentManager.tsx",
+      "line": 214,
+      "type": "message",
+      "text": "Department not found",
+      "context": "throw new Error('Department not found');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/DepartmentManager.tsx",
+      "line": 218,
+      "type": "message",
+      "text": "No sections selected for assignment",
+      "context": "throw new Error('No sections selected for assignment');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/DepartmentManager.tsx",
+      "line": 230,
+      "type": "message",
+      "text": "Department not found",
+      "context": "throw new Error('Department not found');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 89,
+      "type": "message",
+      "text": "Section not found",
+      "context": "if (!section) throw new Error('Section not found');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 322,
+      "type": "message",
+      "text": "Only administrators can toggle section status",
+      "context": "throw new Error('Only administrators can toggle section status');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 337,
+      "type": "message",
+      "text": "Only administrators can reorder sections",
+      "context": "throw new Error('Only administrators can reorder sections');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 349,
+      "type": "message",
+      "text": "No sections selected",
+      "context": "throw new Error('No sections selected');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 354,
+      "type": "message",
+      "text": "Only administrators can perform bulk operations",
+      "context": "throw new Error('Only administrators can perform bulk operations');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 360,
+      "type": "message",
+      "text": "Some sections are already being processed",
+      "context": "throw new Error('Some sections are already being processed');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 369,
+      "type": "message",
+      "text": "Only administrators can duplicate sections",
+      "context": "throw new Error('Only administrators can duplicate sections');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/logic/SectionOperationsManager.tsx",
+      "line": 375,
+      "type": "message",
+      "text": "Section not found",
+      "context": "throw new Error('Section not found');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 66,
+      "type": "jsx-text",
+      "text": "Edit Report Details",
+      "context": "<span>Edit Report Details</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 68,
+      "type": "jsx-prop",
+      "text": "Unsaved changes",
+      "context": "<div className=\"w-2 h-2 bg-orange-500 rounded-full\" title=\"Unsaved changes\" />",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 77,
+      "type": "jsx-text",
+      "text": "• Unsaved changes",
+      "context": "<span className=\"text-orange-600 ml-2\">• Unsaved changes</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 97,
+      "type": "jsx-text",
+      "text": "Report Title",
+      "context": "<Label htmlFor=\"reportTitle\">Report Title</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 107,
+      "type": "jsx-text",
+      "text": "Report Description",
+      "context": "<Label htmlFor=\"reportDescription\">Report Description</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 118,
+      "type": "jsx-text",
+      "text": "Report Cycle",
+      "context": "<Label htmlFor=\"reportCycle\">Report Cycle</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 124,
+      "type": "jsx-text",
+      "text": "Weekly",
+      "context": "<SelectItem value=\"WEEKLY\">Weekly</SelectItem>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 125,
+      "type": "jsx-text",
+      "text": "Monthly",
+      "context": "<SelectItem value=\"MONTHLY\">Monthly</SelectItem>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/CollapsibleReportDetailsPanel.tsx",
+      "line": 126,
+      "type": "jsx-text",
+      "text": "Ad-hoc",
+      "context": "<SelectItem value=\"ADHOC\">Ad-hoc</SelectItem>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 50,
+      "type": "jsx-text",
+      "text": "Promise",
+      "context": "onSendReminder?: (departmentId: string, options?: any) => Promise<void>;",
+      "severity": "high",
+      "suggestion": "component.promise"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 287,
+      "type": "jsx-text",
+      "text": "Priority",
+      "context": "<div className=\"col-span-1\">Priority</div>",
+      "severity": "high",
+      "suggestion": "component.priority"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 288,
+      "type": "jsx-text",
+      "text": "Section",
+      "context": "<div className=\"col-span-4\">Section</div>",
+      "severity": "high",
+      "suggestion": "component.section"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 289,
+      "type": "jsx-text",
+      "text": "Department",
+      "context": "<div className=\"col-span-3\">Department</div>",
+      "severity": "high",
+      "suggestion": "component.department"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 290,
+      "type": "jsx-text",
+      "text": "Days Past Due",
+      "context": "<div className=\"col-span-2\">Days Past Due</div>",
+      "severity": "high",
+      "suggestion": "component.days.past.due"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 291,
+      "type": "jsx-text",
+      "text": "Status",
+      "context": "<div className=\"col-span-2\">Status</div>",
+      "severity": "high",
+      "suggestion": "component.status"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 326,
+      "type": "jsx-text",
+      "text": "Needs Attention",
+      "context": "<span className=\"text-red-600 font-medium\">Needs Attention</span>",
+      "severity": "high",
+      "suggestion": "component.needs.attention"
+    },
+    {
+      "file": "src/components/reports/OverviewTab.tsx",
+      "line": 352,
+      "type": "jsx-text",
+      "text": "⚠️ Needs Attention",
+      "context": "<span className=\"text-xs text-red-600 font-medium\">⚠️ Needs Attention</span>",
+      "severity": "high",
+      "suggestion": "component..needs.attention"
+    },
+    {
+      "file": "src/components/reports/ReportHeader.tsx",
+      "line": 42,
+      "type": "jsx-prop",
+      "text": "Go back",
+      "context": "aria-label=\"Go back\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/ReportManagementHeader.tsx",
+      "line": 89,
+      "type": "jsx-prop",
+      "text": "Go back to dashboard",
+      "context": "aria-label=\"Go back to dashboard\"",
+      "severity": "high",
+      "suggestion": "component.go.back.to.dashboard"
+    },
+    {
+      "file": "src/components/reports/ReportManagementTabs.tsx",
+      "line": 118,
+      "type": "jsx-prop",
+      "text": "Overview",
+      "context": "label=\"Overview\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/ReportManagementTabs.tsx",
+      "line": 127,
+      "type": "jsx-prop",
+      "text": "Sections",
+      "context": "label=\"Sections\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/ReportManagementTabs.tsx",
+      "line": 136,
+      "type": "jsx-prop",
+      "text": "Settings",
+      "context": "label=\"Settings\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/reports/SectionDisplay.tsx",
+      "line": 112,
+      "type": "message",
+      "text": "Report ID is required for image upload",
+      "context": "throw new Error('Report ID is required for image upload');",
+      "severity": "high",
+      "suggestion": "component.report.id.is.required.for.image.upload"
+    },
+    {
+      "file": "src/components/reports/SectionDisplay.tsx",
+      "line": 125,
+      "type": "message",
+      "text": "Failed to upload image",
+      "context": "throw new Error('Failed to upload image');",
+      "severity": "high",
+      "suggestion": "component.failed.to.upload.image"
+    },
+    {
+      "file": "src/components/reports/SectionEditDialog.tsx",
+      "line": 81,
+      "type": "message",
+      "text": "Upload failed",
+      "context": "throw new Error(errorData.error || 'Upload failed');",
+      "severity": "high",
+      "suggestion": "component.upload.failed"
+    },
+    {
+      "file": "src/components/reports/SectionsTab.tsx",
+      "line": 24,
+      "type": "jsx-text",
+      "text": "Promise",
+      "context": "onSave: (updates: SectionUpdate[]) => Promise<void>;",
+      "severity": "high",
+      "suggestion": "component.promise"
+    },
+    {
+      "file": "src/components/reports/SettingsTab.tsx",
+      "line": 78,
+      "type": "jsx-text",
+      "text": "Auto-saving...",
+      "context": "<span className=\"text-sm\">Auto-saving...</span>",
+      "severity": "high",
+      "suggestion": "component.autosaving"
+    },
+    {
+      "file": "src/components/reports/preview/DocumentSection.tsx",
+      "line": 81,
+      "type": "message",
+      "text": "Failed to upload image",
+      "context": "throw new Error('Failed to upload image');",
+      "severity": "high",
+      "suggestion": "component.failed.to.upload.image"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 85,
+      "type": "message",
+      "text": "Upload failed",
+      "context": "throw new Error(errorData.error || 'Upload failed');",
+      "severity": "high",
+      "suggestion": "component.upload.failed"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 151,
+      "type": "message",
+      "text": "Failed to fetch report.",
+      "context": "setError(response.error || 'Failed to fetch report.');",
+      "severity": "high",
+      "suggestion": "component.failed.to.fetch.report"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 155,
+      "type": "message",
+      "text": "Failed to load report",
+      "context": "setError(error.message || 'Failed to load report');",
+      "severity": "high",
+      "suggestion": "component.failed.to.load.report"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 243,
+      "type": "message",
+      "text": "Critical error: Section content parsing failed. Ensure section markers are intact if manually edited.",
+      "context": "setError('Critical error: Section content parsing failed. Ensure section markers are intact if manually edited.');",
+      "severity": "high",
+      "suggestion": "component.critical.error.section.content.parsing.failed.ensu"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 254,
+      "type": "message",
+      "text": "Failed to save report.",
+      "context": "setError(response.error || 'Failed to save report.');",
+      "severity": "high",
+      "suggestion": "component.failed.to.save.report"
+    },
+    {
+      "file": "src/components/reports/preview/FullEditPreview.tsx",
+      "line": 258,
+      "type": "message",
+      "text": "Failed to save report",
+      "context": "setError(error.message || 'Failed to save report');",
+      "severity": "high",
+      "suggestion": "component.failed.to.save.report"
+    },
+    {
+      "file": "src/components/ui/DepartmentCreateDialog.tsx",
+      "line": 45,
+      "type": "jsx-text",
+      "text": "Initial password:",
+      "context": "<strong>Initial password:</strong> {data.initialPassword}",
+      "severity": "high",
+      "suggestion": "component.initial.password"
+    },
+    {
+      "file": "src/components/ui/DepartmentCreateDialog.tsx",
+      "line": 62,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "high",
+      "suggestion": "component.an.unexpected.error.occurred"
+    },
+    {
+      "file": "src/components/ui/DepartmentCreateDialog.tsx",
+      "line": 74,
+      "type": "message",
+      "text": "validation.departmentNameRequired",
+      "context": "setFormError(t('validation.departmentNameRequired'));",
+      "severity": "high",
+      "suggestion": "component.validationdepartmentnamerequired"
+    },
+    {
+      "file": "src/components/ui/DepartmentEditDialog.tsx",
+      "line": 42,
+      "type": "message",
+      "text": "No department selected for update.",
+      "context": "if (!department) throw new Error('No department selected for update.');",
+      "severity": "high",
+      "suggestion": "component.no.department.selected.for.update"
+    },
+    {
+      "file": "src/components/ui/DepartmentEditDialog.tsx",
+      "line": 56,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "high",
+      "suggestion": "component.an.unexpected.error.occurred"
+    },
+    {
+      "file": "src/components/ui/DepartmentEditDialog.tsx",
+      "line": 70,
+      "type": "message",
+      "text": "No changes detected.",
+      "context": "setFormError('No changes detected.');",
+      "severity": "high",
+      "suggestion": "component.no.changes.detected"
+    },
+    {
+      "file": "src/components/ui/DepartmentEditDialog.tsx",
+      "line": 76,
+      "type": "message",
+      "text": "validation.departmentNameRequired",
+      "context": "setFormError(t('validation.departmentNameRequired'));",
+      "severity": "high",
+      "suggestion": "component.validationdepartmentnamerequired"
+    },
+    {
+      "file": "src/components/ui/DepartmentEditDialog.tsx",
+      "line": 80,
+      "type": "message",
+      "text": "No department selected.",
+      "context": "setFormError('No department selected.');",
+      "severity": "high",
+      "suggestion": "component.no.department.selected"
+    },
+    {
+      "file": "src/components/ui/DepartmentNameInlineEdit.tsx",
+      "line": 35,
+      "type": "message",
+      "text": "departments.toast.updateError",
+      "context": "setError(err.message || t('departments.toast.updateError'));",
+      "severity": "high",
+      "suggestion": "component.departmentstoastupdateerror"
+    },
+    {
+      "file": "src/components/ui/DepartmentNameInlineEdit.tsx",
+      "line": 57,
+      "type": "message",
+      "text": "departments.create.nameLabel",
+      "context": "setError(t('departments.create.nameLabel') + ' ' + t('common.required'));",
+      "severity": "high",
+      "suggestion": "component.departmentscreatenamelabel"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 20,
+      "type": "jsx-text",
+      "text": "Promise",
+      "context": "onPasswordReset?: (userId: string) => Promise<{ newPassword: string }>;",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 94,
+      "type": "jsx-text",
+      "text": "Reset Password",
+      "context": "<span>Reset Password</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 106,
+      "type": "jsx-text",
+      "text": "This will generate a new temporary password for the user. The user should change this password on their next login.",
+      "context": "<p>This will generate a new temporary password for the user. The user should change this password on their next login.</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 153,
+      "type": "jsx-text",
+      "text": "Important:",
+      "context": "<p className=\"font-medium\">Important:</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 155,
+      "type": "jsx-text",
+      "text": "Share this password securely with the user",
+      "context": "<li>Share this password securely with the user</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 156,
+      "type": "jsx-text",
+      "text": "The user should change this password on their next login",
+      "context": "<li>The user should change this password on their next login</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/PasswordResetDialog.tsx",
+      "line": 157,
+      "type": "jsx-text",
+      "text": "This password will not be shown again",
+      "context": "<li>This password will not be shown again</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 74,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "high",
+      "suggestion": "component.an.unexpected.error.occurred"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 148,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "high",
+      "suggestion": "component.validationtemplatenamerequired"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 153,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "high",
+      "suggestion": "component.validationatleastonesection"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 163,
+      "type": "message",
+      "text": "validation.allSectionsMustHaveNameAndDepartment",
+      "context": "setFormError(t('validation.allSectionsMustHaveNameAndDepartment'));",
+      "severity": "high",
+      "suggestion": "component.validationallsectionsmusthavenameanddepartment"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 186,
+      "type": "jsx-text",
+      "text": "Create New Report Template",
+      "context": "<DialogTitle>Create New Report Template</DialogTitle>",
+      "severity": "high",
+      "suggestion": "component.create.new.report.template"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 194,
+      "type": "jsx-text",
+      "text": "Template Name",
+      "context": "<Label htmlFor=\"name\">Template Name<span className=\"text-red-500\">*</span></Label>",
+      "severity": "high",
+      "suggestion": "component.template.name"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 206,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"description\">Description</Label>",
+      "severity": "high",
+      "suggestion": "component.description"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 219,
+      "type": "jsx-text",
+      "text": "Template Sections",
+      "context": "<Label>Template Sections<span className=\"text-red-500\">*</span></Label>",
+      "severity": "high",
+      "suggestion": "component.template.sections"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 267,
+      "type": "jsx-text",
+      "text": "Section Name",
+      "context": "<Label htmlFor={`section-name-${index}`}>Section Name<span className=\"text-red-500\">*</span></Label>",
+      "severity": "high",
+      "suggestion": "component.section.name"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 279,
+      "type": "jsx-text",
+      "text": "Assigned Department",
+      "context": "<Label htmlFor={`section-department-${index}`}>Assigned Department<span className=\"text-red-500\">*</span></Label>",
+      "severity": "high",
+      "suggestion": "component.assigned.department"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateDialog.tsx",
+      "line": 299,
+      "type": "jsx-text",
+      "text": "Instructions",
+      "context": "<Label htmlFor={`section-instructions-${index}`}>Instructions</Label>",
+      "severity": "high",
+      "suggestion": "component.instructions"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 84,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 153,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 157,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 162,
+      "type": "message",
+      "text": "Each section must have an assigned department.",
+      "context": "setFormError('Each section must have an assigned department.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 179,
+      "type": "jsx-text",
+      "text": "Create New Template",
+      "context": "<h2 className=\"text-xl font-bold\">Create New Template</h2>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 188,
+      "type": "jsx-text",
+      "text": "Template Name",
+      "context": "<Label htmlFor=\"template-name\">Template Name <span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 199,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"template-description\">Description</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 213,
+      "type": "jsx-text",
+      "text": "Sections",
+      "context": "<h3 className=\"font-semibold\">Sections</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 240,
+      "type": "jsx-text",
+      "text": "Section Name",
+      "context": "<Label htmlFor={`section-name-${index}`}>Section Name<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 252,
+      "type": "jsx-text",
+      "text": "Assigned Department",
+      "context": "<Label htmlFor={`section-dept-${index}`}>Assigned Department<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateCreateInline.tsx",
+      "line": 272,
+      "type": "jsx-text",
+      "text": "Instructions",
+      "context": "<Label htmlFor={`section-instr-${index}`}>Instructions</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateDeleteDialog.tsx",
+      "line": 54,
+      "type": "jsx-text",
+      "text": "Are you sure you want to delete this report template?",
+      "context": "<AlertDialogTitle>Are you sure you want to delete this report template?</AlertDialogTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateDeleteDialog.tsx",
+      "line": 62,
+      "type": "jsx-text",
+      "text": "Cancel",
+      "context": "<AlertDialogCancel onClick={() => onOpenChange(false)} disabled={mutation.isPending}>Cancel</AlertDialogCancel>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 98,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 166,
+      "type": "message",
+      "text": "No template selected for editing.",
+      "context": "setFormError('No template selected for editing.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 171,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 176,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 186,
+      "type": "message",
+      "text": "validation.allSectionsMustHaveNameAndDepartment",
+      "context": "setFormError(t('validation.allSectionsMustHaveNameAndDepartment'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 221,
+      "type": "jsx-text",
+      "text": "Edit Report Template",
+      "context": "<DialogTitle>Edit Report Template</DialogTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 229,
+      "type": "jsx-text",
+      "text": "Template Name",
+      "context": "<Label htmlFor=\"name\">Template Name<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 244,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"description\">Description</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 260,
+      "type": "jsx-text",
+      "text": "Template Sections",
+      "context": "<Label>Template Sections<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 308,
+      "type": "jsx-text",
+      "text": "Section Name",
+      "context": "<Label htmlFor={`section-name-${index}`}>Section Name<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 320,
+      "type": "jsx-text",
+      "text": "Assigned Department",
+      "context": "<Label htmlFor={`section-department-${index}`}>Assigned Department<span className=\"text-red-500\">*</span></Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditDialog.tsx",
+      "line": 340,
+      "type": "jsx-text",
+      "text": "Instructions",
+      "context": "<Label htmlFor={`section-instructions-${index}`}>Instructions</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 88,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 155,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 159,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 209,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"template-description\">Description</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 226,
+      "type": "jsx-text",
+      "text": "Sections",
+      "context": "<h3 className=\"font-medium\">Sections</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplateEditInline.tsx",
+      "line": 310,
+      "type": "jsx-text",
+      "text": "Instructions",
+      "context": "<Label htmlFor={`section-instr-${index}`}>Instructions</Label>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 37,
+      "type": "jsx-text",
+      "text": "Report Template Preview",
+      "context": "<DialogTitle>Report Template Preview</DialogTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 38,
+      "type": "jsx-text",
+      "text": "Viewing details for:",
+      "context": "{template && <DialogDescription>Viewing details for: <strong>{template.name}</strong></DialogDescription>}",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 57,
+      "type": "jsx-text",
+      "text": "Error Fetching Template",
+      "context": "<AlertTitle>Error Fetching Template</AlertTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 67,
+      "type": "jsx-text",
+      "text": "Name",
+      "context": "<h3 className=\"text-sm font-semibold text-gray-700\">Name</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 72,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<h3 className=\"text-sm font-semibold text-gray-700\">Description</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 85,
+      "type": "jsx-text",
+      "text": "No sections defined for this template.",
+      "context": "<p className=\"text-sm text-gray-500 italic\">No sections defined for this template.</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 89,
+      "type": "jsx-text",
+      "text": "Created By",
+      "context": "<h3 className=\"text-sm font-semibold text-gray-700\">Created By</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 93,
+      "type": "jsx-text",
+      "text": "Department",
+      "context": "<h3 className=\"text-sm font-semibold text-gray-700\">Department</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/ReportTemplatePreviewDialog.tsx",
+      "line": 100,
+      "type": "jsx-text",
+      "text": "onOpenChange(false)}>Close",
+      "context": "<Button variant=\"outline\" onClick={() => onOpenChange(false)}>Close</Button>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 98,
+      "type": "jsx-text",
+      "text": "Template Sections",
+      "context": "<h3 className=\"text-lg font-medium\">Template Sections</h3>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 121,
+      "type": "jsx-text",
+      "text": "No sections yet",
+      "context": "<h4 className=\"text-lg font-medium text-gray-900\">No sections yet</h4>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 181,
+      "type": "jsx-text",
+      "text": "Section Tips",
+      "context": "<p className=\"font-medium text-blue-900\">Section Tips</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 183,
+      "type": "jsx-text",
+      "text": "• Drag sections to reorder them",
+      "context": "<li>• Drag sections to reorder them</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 184,
+      "type": "jsx-text",
+      "text": "• Each section must be assigned to a department",
+      "context": "<li>• Each section must be assigned to a department</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 185,
+      "type": "jsx-text",
+      "text": "• Instructions help departments understand what content to provide",
+      "context": "<li>• Instructions help departments understand what content to provide</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/SectionBuilder.tsx",
+      "line": 186,
+      "type": "jsx-text",
+      "text": "• Sections can be collapsed to save space while editing",
+      "context": "<li>• Sections can be collapsed to save space while editing</li>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/TemplateCard.tsx",
+      "line": 115,
+      "type": "jsx-text",
+      "text": "Sections:",
+      "context": "<span className=\"text-sm text-gray-500\">Sections:</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 92,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "high",
+      "suggestion": "component.an.unexpected.error.occurred"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 117,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "high",
+      "suggestion": "component.validationtemplatenamerequired"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 121,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "high",
+      "suggestion": "component.validationatleastonesection"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 128,
+      "type": "message",
+      "text": "validation.allSectionsMustHaveName",
+      "context": "setFormError(t('validation.allSectionsMustHaveName'));",
+      "severity": "high",
+      "suggestion": "component.validationallsectionsmusthavename"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 134,
+      "type": "message",
+      "text": "validation.eachSectionMustHaveDepartment",
+      "context": "setFormError(t('validation.eachSectionMustHaveDepartment'));",
+      "severity": "high",
+      "suggestion": "component.validationeachsectionmusthavedepartment"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 163,
+      "type": "jsx-text",
+      "text": "Create New Template",
+      "context": "<span>Create New Template</span>",
+      "severity": "high",
+      "suggestion": "component.create.new.template"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 190,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"template-description\">Description</Label>",
+      "severity": "high",
+      "suggestion": "component.description"
+    },
+    {
+      "file": "src/components/ui/TemplateCreateModal.tsx",
+      "line": 203,
+      "type": "jsx-text",
+      "text": "Full Description",
+      "context": "<Label htmlFor=\"template-description-full\">Full Description</Label>",
+      "severity": "high",
+      "suggestion": "component.full.description"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 113,
+      "type": "message",
+      "text": "An unexpected error occurred.",
+      "context": "setFormError(err.message || 'An unexpected error occurred.');",
+      "severity": "high",
+      "suggestion": "component.an.unexpected.error.occurred"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 148,
+      "type": "message",
+      "text": "validation.templateNameRequired",
+      "context": "setFormError(t('validation.templateNameRequired'));",
+      "severity": "high",
+      "suggestion": "component.validationtemplatenamerequired"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 152,
+      "type": "message",
+      "text": "validation.atLeastOneSection",
+      "context": "setFormError(t('validation.atLeastOneSection'));",
+      "severity": "high",
+      "suggestion": "component.validationatleastonesection"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 159,
+      "type": "message",
+      "text": "validation.allSectionsMustHaveName",
+      "context": "setFormError(t('validation.allSectionsMustHaveName'));",
+      "severity": "high",
+      "suggestion": "component.validationallsectionsmusthavename"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 165,
+      "type": "message",
+      "text": "Each section must have an assigned department.",
+      "context": "setFormError('Each section must have an assigned department.');",
+      "severity": "high",
+      "suggestion": "component.each.section.must.have.an.assigned.department"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 197,
+      "type": "jsx-text",
+      "text": "Edit Template",
+      "context": "<span>Edit Template</span>",
+      "severity": "high",
+      "suggestion": "component.edit.template"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 224,
+      "type": "jsx-text",
+      "text": "Created By",
+      "context": "<Label htmlFor=\"template-created\">Created By</Label>",
+      "severity": "high",
+      "suggestion": "component.created.by"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 235,
+      "type": "jsx-text",
+      "text": "Description",
+      "context": "<Label htmlFor=\"template-description-full\">Description</Label>",
+      "severity": "high",
+      "suggestion": "component.description"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 254,
+      "type": "jsx-text",
+      "text": "Loading departments...",
+      "context": "<span>Loading departments...</span>",
+      "severity": "high",
+      "suggestion": "component.loading.departments"
+    },
+    {
+      "file": "src/components/ui/TemplateEditModal.tsx",
+      "line": 277,
+      "type": "jsx-text",
+      "text": "● Unsaved changes",
+      "context": "<span className=\"text-amber-600\">● Unsaved changes</span>",
+      "severity": "high",
+      "suggestion": "component..unsaved.changes"
+    },
+    {
+      "file": "src/components/ui/UserCreateDialog.tsx",
+      "line": 67,
+      "type": "message",
+      "text": "users.create.validationError",
+      "context": "setError(t('users.create.validationError'));",
+      "severity": "high",
+      "suggestion": "component.userscreatevalidationerror"
+    },
+    {
+      "file": "src/components/ui/UserCreateDialog.tsx",
+      "line": 161,
+      "type": "jsx-text",
+      "text": "Department",
+      "context": "<SelectItem value={UserRole.DEPARTMENT}>Department</SelectItem>",
+      "severity": "high",
+      "suggestion": "component.department"
+    },
+    {
+      "file": "src/components/ui/UserCreateDialog.tsx",
+      "line": 162,
+      "type": "jsx-text",
+      "text": "Secretary",
+      "context": "<SelectItem value={UserRole.SECRETARY}>Secretary</SelectItem>",
+      "severity": "high",
+      "suggestion": "component.secretary"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 92,
+      "type": "message",
+      "text": "Passwords do not match",
+      "context": "setError('Passwords do not match');",
+      "severity": "high",
+      "suggestion": "component.passwords.do.not.match"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 97,
+      "type": "message",
+      "text": "Password must be at least 6 characters long",
+      "context": "setError('Password must be at least 6 characters long');",
+      "severity": "high",
+      "suggestion": "component.password.must.be.at.least.6.characters.long"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 106,
+      "type": "message",
+      "text": "Please select a department",
+      "context": "setError('Please select a department');",
+      "severity": "high",
+      "suggestion": "component.please.select.a.department"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 149,
+      "type": "message",
+      "text": "error.noChangesDetected",
+      "context": "toast({ title: t('error.noChangesDetected') });",
+      "severity": "high",
+      "suggestion": "component.errornochangesdetected"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 281,
+      "type": "jsx-text",
+      "text": "Loading departments...",
+      "context": "<SelectItem value=\"__loading__\" disabled>Loading departments...</SelectItem>",
+      "severity": "high",
+      "suggestion": "component.loading.departments"
+    },
+    {
+      "file": "src/components/ui/UserEditDialog.tsx",
+      "line": 302,
+      "type": "jsx-text",
+      "text": "Cancel",
+      "context": "<Button type=\"button\" variant=\"outline\" onClick={onClose}>Cancel</Button>",
+      "severity": "high",
+      "suggestion": "component.cancel"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 76,
+      "type": "jsx-text",
+      "text": "User Details",
+      "context": "<span>User Details</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 117,
+      "type": "jsx-text",
+      "text": "Role & Permissions",
+      "context": "<span>Role & Permissions</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 136,
+      "type": "jsx-text",
+      "text": "Department Assignment",
+      "context": "<span>Department Assignment</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 156,
+      "type": "jsx-text",
+      "text": "Account Information",
+      "context": "<span>Account Information</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 160,
+      "type": "jsx-text",
+      "text": "User ID:",
+      "context": "<span className=\"font-medium text-gray-700\">User ID:</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 164,
+      "type": "jsx-text",
+      "text": "Account Created:",
+      "context": "<span className=\"font-medium text-gray-700\">Account Created:</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 168,
+      "type": "jsx-text",
+      "text": "Last Updated:",
+      "context": "<span className=\"font-medium text-gray-700\">Last Updated:</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 172,
+      "type": "jsx-text",
+      "text": "Account Status:",
+      "context": "<span className=\"font-medium text-gray-700\">Account Status:</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 183,
+      "type": "jsx-text",
+      "text": "Recent Activity",
+      "context": "<h4 className=\"font-medium\">Recent Activity</h4>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 185,
+      "type": "jsx-text",
+      "text": "Activity tracking will be available in a future update.",
+      "context": "<p>Activity tracking will be available in a future update.</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/UserViewModal.tsx",
+      "line": 186,
+      "type": "jsx-text",
+      "text": "This will include last login time, recent actions, and usage statistics.",
+      "context": "<p className=\"mt-1\">This will include last login time, recent actions, and usage statistics.</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/__tests__/BackButton.test.tsx",
+      "line": 45,
+      "type": "jsx-prop",
+      "text": "Go Back",
+      "context": "<BackButton label=\"Go Back\" />",
+      "severity": "high",
+      "suggestion": "component.go.back"
+    },
+    {
+      "file": "src/components/ui/__tests__/BackButton.test.tsx",
+      "line": 81,
+      "type": "jsx-prop",
+      "text": "Go Back",
+      "context": "<BackButton label=\"Go Back\" />",
+      "severity": "high",
+      "suggestion": "component.go.back"
+    },
+    {
+      "file": "src/components/ui/__tests__/ErrorMessage.test.tsx",
+      "line": 9,
+      "type": "jsx-prop",
+      "text": "Test Error",
+      "context": "title=\"Test Error\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/__tests__/ErrorMessage.test.tsx",
+      "line": 88,
+      "type": "jsx-prop",
+      "text": "Error Title",
+      "context": "title=\"Error Title\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/alert.tsx",
+      "line": 24,
+      "type": "jsx-text",
+      "text": "& VariantProps",
+      "context": "React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/breadcrumb.tsx",
+      "line": 102,
+      "type": "jsx-text",
+      "text": "More",
+      "context": "<span className=\"sr-only\">More</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/carousel.tsx",
+      "line": 37,
+      "type": "message",
+      "text": "useCarousel must be used within a <Carousel />",
+      "context": "throw new Error(\"useCarousel must be used within a <Carousel />\")",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/carousel.tsx",
+      "line": 218,
+      "type": "jsx-text",
+      "text": "Previous slide",
+      "context": "<span className=\"sr-only\">Previous slide</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/carousel.tsx",
+      "line": 247,
+      "type": "jsx-text",
+      "text": "Next slide",
+      "context": "<span className=\"sr-only\">Next slide</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/chart.tsx",
+      "line": 29,
+      "type": "message",
+      "text": "useChart must be used within a <ChartContainer />",
+      "context": "throw new Error(\"useChart must be used within a <ChartContainer />\")",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/dialog.tsx",
+      "line": 47,
+      "type": "jsx-text",
+      "text": "Close",
+      "context": "<span className=\"sr-only\">Close</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/form.tsx",
+      "line": 20,
+      "type": "jsx-text",
+      "text": "= FieldPath",
+      "context": "TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/form.tsx",
+      "line": 31,
+      "type": "jsx-text",
+      "text": "= FieldPath",
+      "context": "TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/form.tsx",
+      "line": 50,
+      "type": "message",
+      "text": "useFormField should be used within <FormField>",
+      "context": "throw new Error(\"useFormField should be used within <FormField>\")",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/pagination.tsx",
+      "line": 67,
+      "type": "jsx-prop",
+      "text": "Go to previous page",
+      "context": "aria-label=\"Go to previous page\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/pagination.tsx",
+      "line": 73,
+      "type": "jsx-text",
+      "text": "Previous",
+      "context": "<span>Previous</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/pagination.tsx",
+      "line": 83,
+      "type": "jsx-prop",
+      "text": "Go to next page",
+      "context": "aria-label=\"Go to next page\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/pagination.tsx",
+      "line": 88,
+      "type": "jsx-text",
+      "text": "Next",
+      "context": "<span>Next</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/pagination.tsx",
+      "line": 104,
+      "type": "jsx-text",
+      "text": "More pages",
+      "context": "<span className=\"sr-only\">More pages</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/sheet.tsx",
+      "line": 68,
+      "type": "jsx-text",
+      "text": "Close",
+      "context": "<span className=\"sr-only\">Close</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/sidebar.tsx",
+      "line": 42,
+      "type": "message",
+      "text": "useSidebar must be used within a SidebarProvider.",
+      "context": "throw new Error(\"useSidebar must be used within a SidebarProvider.\")",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/sidebar.tsx",
+      "line": 280,
+      "type": "jsx-text",
+      "text": "Toggle Sidebar",
+      "context": "<span className=\"sr-only\">Toggle Sidebar</span>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/sidebar.tsx",
+      "line": 296,
+      "type": "jsx-prop",
+      "text": "Toggle Sidebar",
+      "context": "aria-label=\"Toggle Sidebar\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/components/ui/sidebar.tsx",
+      "line": 299,
+      "type": "jsx-prop",
+      "text": "Toggle Sidebar",
+      "context": "title=\"Toggle Sidebar\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 71,
+      "type": "jsx-text",
+      "text": "• Test navigation changes during low-activity periods",
+      "context": "<li>• Test navigation changes during low-activity periods</li>",
+      "severity": "high",
+      "suggestion": "component..test.navigation.changes.during.lowactivity.period"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 72,
+      "type": "jsx-text",
+      "text": "• Communicate changes to users in advance",
+      "context": "<li>• Communicate changes to users in advance</li>",
+      "severity": "high",
+      "suggestion": "component..communicate.changes.to.users.in.advance"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 73,
+      "type": "jsx-text",
+      "text": "• Monitor user feedback after switching",
+      "context": "<li>• Monitor user feedback after switching</li>",
+      "severity": "high",
+      "suggestion": "component..monitor.user.feedback.after.switching"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 74,
+      "type": "jsx-text",
+      "text": "• Consider reverting if significant issues arise",
+      "context": "<li>• Consider reverting if significant issues arise</li>",
+      "severity": "high",
+      "suggestion": "component..consider.reverting.if.significant.issues.arise"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 75,
+      "type": "jsx-text",
+      "text": "• Ensure all team members are trained on new navigation",
+      "context": "<li>• Ensure all team members are trained on new navigation</li>",
+      "severity": "high",
+      "suggestion": "component..ensure.all.team.members.are.trained.on.new.naviga"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 82,
+      "type": "jsx-text",
+      "text": "• Changes take effect immediately for all users",
+      "context": "<li>• Changes take effect immediately for all users</li>",
+      "severity": "high",
+      "suggestion": "component..changes.take.effect.immediately.for.all.users"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 83,
+      "type": "jsx-text",
+      "text": "• Page refresh is required to see changes",
+      "context": "<li>• Page refresh is required to see changes</li>",
+      "severity": "high",
+      "suggestion": "component..page.refresh.is.required.to.see.changes"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 84,
+      "type": "jsx-text",
+      "text": "• Error boundaries provide fallback to horizontal navigation",
+      "context": "<li>• Error boundaries provide fallback to horizontal navigation</li>",
+      "severity": "high",
+      "suggestion": "component..error.boundaries.provide.fallback.to.horizontal.n"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 85,
+      "type": "jsx-text",
+      "text": "• Mobile users automatically get responsive behavior",
+      "context": "<li>• Mobile users automatically get responsive behavior</li>",
+      "severity": "high",
+      "suggestion": "component..mobile.users.automatically.get.responsive.behavio"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 86,
+      "type": "jsx-text",
+      "text": "• Accessibility features are maintained in both modes",
+      "context": "<li>• Accessibility features are maintained in both modes</li>",
+      "severity": "high",
+      "suggestion": "component..accessibility.features.are.maintained.in.both.mod"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 111,
+      "type": "jsx-text",
+      "text": "User Preferences:",
+      "context": "<p><strong>User Preferences:</strong> Allow individual users to override global navigation setting</p>",
+      "severity": "high",
+      "suggestion": "component.user.preferences"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 111,
+      "type": "jsx-text",
+      "text": "Allow individual users to override global navigation setting",
+      "context": "<p><strong>User Preferences:</strong> Allow individual users to override global navigation setting</p>",
+      "severity": "high",
+      "suggestion": "component.allow.individual.users.to.override.global.navigati"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 112,
+      "type": "jsx-text",
+      "text": "A/B Testing:",
+      "context": "<p><strong>A/B Testing:</strong> Test navigation types with specific user groups</p>",
+      "severity": "high",
+      "suggestion": "component.ab.testing"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 112,
+      "type": "jsx-text",
+      "text": "Test navigation types with specific user groups",
+      "context": "<p><strong>A/B Testing:</strong> Test navigation types with specific user groups</p>",
+      "severity": "high",
+      "suggestion": "component.test.navigation.types.with.specific.user.groups"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 113,
+      "type": "jsx-text",
+      "text": "Analytics:",
+      "context": "<p><strong>Analytics:</strong> Track navigation usage patterns and user satisfaction</p>",
+      "severity": "high",
+      "suggestion": "component.analytics"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 113,
+      "type": "jsx-text",
+      "text": "Track navigation usage patterns and user satisfaction",
+      "context": "<p><strong>Analytics:</strong> Track navigation usage patterns and user satisfaction</p>",
+      "severity": "high",
+      "suggestion": "component.track.navigation.usage.patterns.and.user.satisfact"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 114,
+      "type": "jsx-text",
+      "text": "Custom Layouts:",
+      "context": "<p><strong>Custom Layouts:</strong> Additional navigation configurations and themes</p>",
+      "severity": "high",
+      "suggestion": "component.custom.layouts"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 114,
+      "type": "jsx-text",
+      "text": "Additional navigation configurations and themes",
+      "context": "<p><strong>Custom Layouts:</strong> Additional navigation configurations and themes</p>",
+      "severity": "high",
+      "suggestion": "component.additional.navigation.configurations.and.themes"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 115,
+      "type": "jsx-text",
+      "text": "Quick Actions:",
+      "context": "<p><strong>Quick Actions:</strong> Keyboard shortcuts and productivity enhancements</p>",
+      "severity": "high",
+      "suggestion": "component.quick.actions"
+    },
+    {
+      "file": "src/pages/AdminNavigationSettings.tsx",
+      "line": 115,
+      "type": "jsx-text",
+      "text": "Keyboard shortcuts and productivity enhancements",
+      "context": "<p><strong>Quick Actions:</strong> Keyboard shortcuts and productivity enhancements</p>",
+      "severity": "high",
+      "suggestion": "component.keyboard.shortcuts.and.productivity.enhancements"
+    },
+    {
+      "file": "src/pages/Dashboard.tsx",
+      "line": 81,
+      "type": "message",
+      "text": "Reports Loading",
+      "context": "const formattedError = formatError(error, 'Reports Loading');",
+      "severity": "high",
+      "suggestion": "component.reports.loading"
+    },
+    {
+      "file": "src/pages/Dashboard.tsx",
+      "line": 172,
+      "type": "message",
+      "text": "Reports Loading",
+      "context": "const formattedError = formatError(error, 'Reports Loading');",
+      "severity": "high",
+      "suggestion": "component.reports.loading"
+    },
+    {
+      "file": "src/pages/DepartmentAdminPage.tsx",
+      "line": 36,
+      "type": "message",
+      "text": "Department Loading",
+      "context": "const formattedError = formatError(error, 'Department Loading');",
+      "severity": "high",
+      "suggestion": "component.department.loading"
+    },
+    {
+      "file": "src/pages/ReportCreate.tsx",
+      "line": 149,
+      "type": "message",
+      "text": "), description: t(",
+      "context": "toast({ title: t('common.error'), description: t('reports.create.validation.templateTitleCycleRequired'), variant: 'destructive' });",
+      "severity": "high",
+      "suggestion": "component..description.t"
+    },
+    {
+      "file": "src/pages/ReportCreate.tsx",
+      "line": 157,
+      "type": "message",
+      "text": "), description: t(",
+      "context": "toast({ title: t('common.success'), description: t('reports.create.success.createdFromTemplate', { title: newReport.title }) });",
+      "severity": "high",
+      "suggestion": "component..description.t"
+    },
+    {
+      "file": "src/pages/ReportCreate.tsx",
+      "line": 172,
+      "type": "message",
+      "text": "), description: t(",
+      "context": "toast({ title: t('common.error'), description: t('reports.create.validation.titleRequired'), variant: 'destructive' });",
+      "severity": "high",
+      "suggestion": "component..description.t"
+    },
+    {
+      "file": "src/pages/ReportCreate.tsx",
+      "line": 177,
+      "type": "message",
+      "text": "), description: t(",
+      "context": "toast({ title: t('common.error'), description: t('reports.create.validation.sectionsRequired'), variant: 'destructive' });",
+      "severity": "high",
+      "suggestion": "component..description.t"
+    },
+    {
+      "file": "src/pages/ReportCreate.tsx",
+      "line": 191,
+      "type": "message",
+      "text": "), description: t(",
+      "context": "toast({ title: t('common.success'), description: t('reports.create.success.customReportCreated', { title: newReport.title }) });",
+      "severity": "high",
+      "suggestion": "component..description.t"
+    },
+    {
+      "file": "src/pages/ReportEdit.tsx",
+      "line": 172,
+      "type": "jsx-prop",
+      "text": "Back to Dashboard",
+      "context": "<BackButton to=\"/dashboard\" label=\"Back to Dashboard\" variant=\"outline\" className=\"mt-4\" />",
+      "severity": "high",
+      "suggestion": "component.back.to.dashboard"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 66,
+      "type": "message",
+      "text": "Upload failed",
+      "context": "throw new Error(errorData.error || 'Upload failed');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 137,
+      "type": "message",
+      "text": "Failed to fetch report.",
+      "context": "setError(response.error || 'Failed to fetch report.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 232,
+      "type": "message",
+      "text": "Critical error: Section content parsing failed. Ensure section markers are intact if manually edited.",
+      "context": "setError('Critical error: Section content parsing failed. Ensure section markers are intact if manually edited.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 245,
+      "type": "message",
+      "text": "Failed to save report.",
+      "context": "setError(response.error || 'Failed to save report.');",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 268,
+      "type": "jsx-text",
+      "text": "Error Loading Report",
+      "context": "<AlertTitle>Error Loading Report</AlertTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 273,
+      "type": "jsx-text",
+      "text": "navigate(-1)} variant=\"outline\" className=\"mt-4\">Go Back",
+      "context": "<Button onClick={() => navigate(-1)} variant=\"outline\" className=\"mt-4\">Go Back</Button>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 284,
+      "type": "jsx-text",
+      "text": "Editor Initialization Error",
+      "context": "<AlertTitle>Editor Initialization Error</AlertTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 290,
+      "type": "jsx-text",
+      "text": "navigate(-1)} variant=\"outline\" className=\"mt-4\">Go Back",
+      "context": "<Button onClick={() => navigate(-1)} variant=\"outline\" className=\"mt-4\">Go Back</Button>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 300,
+      "type": "jsx-prop",
+      "text": "Full Document Editor - Edit the entire report as a single document",
+      "context": "subtitle=\"Full Document Editor - Edit the entire report as a single document\"",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 314,
+      "type": "jsx-text",
+      "text": "Document Editor",
+      "context": "<CardTitle className=\"text-lg\">Document Editor</CardTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportFullEditPage.tsx",
+      "line": 345,
+      "type": "jsx-text",
+      "text": "Save Error",
+      "context": "<AlertTitle>Save Error</AlertTitle>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/ReportTemplateAdminPage.tsx",
+      "line": 99,
+      "type": "jsx-text",
+      "text": "bValue ? -1 : aValue",
+      "context": "return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;",
+      "severity": "high",
+      "suggestion": "component.bvalue.1.avalue"
+    },
+    {
+      "file": "src/pages/UnifiedReportPreviewPage.tsx",
+      "line": 24,
+      "type": "jsx-text",
+      "text": "Report ID is required",
+      "context": "<p className=\"text-destructive\">Report ID is required</p>",
+      "severity": "medium",
+      "suggestion": "Add useLanguage hook and wrap translatable strings with t()"
+    },
+    {
+      "file": "src/pages/UserAdminPage.tsx",
+      "line": 145,
+      "type": "jsx-text",
+      "text": "bValue ? -1 : aValue",
+      "context": "return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;",
+      "severity": "high",
+      "suggestion": "component.bvalue.1.avalue"
+    }
+  ],
+  "summary": {
+    "totalIssues": 258,
+    "byType": {
+      "message": 81,
+      "jsx-text": 155,
+      "jsx-prop": 22
+    },
+    "byFile": {
+      "src/components/ErrorBoundary.tsx": 1,
+      "src/components/admin/NavigationSettings.tsx": 20,
+      "src/components/analytics/CompletionTrends.tsx": 1,
+      "src/components/layout/AppHeader.tsx": 1,
+      "src/components/layout/AppSidebar.tsx": 2,
+      "src/components/layout/Breadcrumbs.tsx": 1,
+      "src/components/layout/MainLayout.tsx": 4,
+      "src/components/logic/DepartmentManager.tsx": 5,
+      "src/components/logic/SectionOperationsManager.tsx": 8,
+      "src/components/reports/CollapsibleReportDetailsPanel.tsx": 9,
+      "src/components/reports/OverviewTab.tsx": 8,
+      "src/components/reports/ReportHeader.tsx": 1,
+      "src/components/reports/ReportManagementHeader.tsx": 1,
+      "src/components/reports/ReportManagementTabs.tsx": 3,
+      "src/components/reports/SectionDisplay.tsx": 2,
+      "src/components/reports/SectionEditDialog.tsx": 1,
+      "src/components/reports/SectionsTab.tsx": 1,
+      "src/components/reports/SettingsTab.tsx": 1,
+      "src/components/reports/preview/DocumentSection.tsx": 1,
+      "src/components/reports/preview/FullEditPreview.tsx": 6,
+      "src/components/ui/DepartmentCreateDialog.tsx": 3,
+      "src/components/ui/DepartmentEditDialog.tsx": 5,
+      "src/components/ui/DepartmentNameInlineEdit.tsx": 2,
+      "src/components/ui/PasswordResetDialog.tsx": 7,
+      "src/components/ui/ReportTemplateCreateDialog.tsx": 11,
+      "src/components/ui/ReportTemplateCreateInline.tsx": 11,
+      "src/components/ui/ReportTemplateDeleteDialog.tsx": 2,
+      "src/components/ui/ReportTemplateEditDialog.tsx": 12,
+      "src/components/ui/ReportTemplateEditInline.tsx": 6,
+      "src/components/ui/ReportTemplatePreviewDialog.tsx": 9,
+      "src/components/ui/SectionBuilder.tsx": 7,
+      "src/components/ui/TemplateCard.tsx": 1,
+      "src/components/ui/TemplateCreateModal.tsx": 8,
+      "src/components/ui/TemplateEditModal.tsx": 10,
+      "src/components/ui/UserCreateDialog.tsx": 3,
+      "src/components/ui/UserEditDialog.tsx": 6,
+      "src/components/ui/UserViewModal.tsx": 11,
+      "src/components/ui/__tests__/BackButton.test.tsx": 2,
+      "src/components/ui/__tests__/ErrorMessage.test.tsx": 2,
+      "src/components/ui/alert.tsx": 1,
+      "src/components/ui/breadcrumb.tsx": 1,
+      "src/components/ui/carousel.tsx": 3,
+      "src/components/ui/chart.tsx": 1,
+      "src/components/ui/dialog.tsx": 1,
+      "src/components/ui/form.tsx": 3,
+      "src/components/ui/pagination.tsx": 5,
+      "src/components/ui/sheet.tsx": 1,
+      "src/components/ui/sidebar.tsx": 4,
+      "src/pages/AdminNavigationSettings.tsx": 20,
+      "src/pages/Dashboard.tsx": 2,
+      "src/pages/DepartmentAdminPage.tsx": 1,
+      "src/pages/ReportCreate.tsx": 5,
+      "src/pages/ReportEdit.tsx": 1,
+      "src/pages/ReportFullEditPage.tsx": 11,
+      "src/pages/ReportTemplateAdminPage.tsx": 1,
+      "src/pages/UnifiedReportPreviewPage.tsx": 1,
+      "src/pages/UserAdminPage.tsx": 1
+    },
+    "severityCount": {
+      "high": 111,
+      "medium": 147,
+      "low": 0
+    }
+  }
+}

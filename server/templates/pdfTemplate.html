@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        /* Print-specific styles */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+            font-size: 12pt;
+            margin: 0;
+            padding: 10px;
+        }
+
+        /* Header styles */
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .report-title {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .report-meta {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        /* Department sections */
+        .department-section {
+            page-break-inside: avoid;
+            margin-bottom: 30px;
+        }
+
+        .department-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .section-content {
+            margin-bottom: 20px;
+            padding-left: 10px;
+        }
+
+        .section-separator {
+            margin: 20px 0;
+            border-top: 1px dashed #ccc;
+            height: 1px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #34495e;
+            margin: 15px 0 10px 0;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #34495e;
+            margin: 12px 0 8px 0;
+            page-break-after: avoid;
+        }
+
+        h4, h5, h6 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #34495e;
+            margin: 10px 0 5px 0;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 11pt;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Images - Note: Images are replaced with text placeholders to reduce PDF size */
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            display: block;
+        }
+        
+        /* Image placeholder styling */
+        .image-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        /* Code blocks */
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 3px;
+            padding: 2px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            font-style: italic;
+        }
+
+        /* Page break utilities */
+        .page-break {
+            page-break-before: always;
+        }
+
+        .no-page-break {
+            page-break-inside: avoid;
+        }
+
+        /* Footer */
+        .report-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 10pt;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Responsive adjustments for PDF - professional document margins */
+        @page {
+            size: A4;
+            margin: 0.5in;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-header">
+        <h1 class="report-title">{{title}}</h1>
+        <div class="report-meta">Report Cycle: {{cycle}}</div>
+        <div class="report-meta">Generated: {{generatedDate}}</div>
+    </div>
+
+    <div class="report-content">
+        {{content}}
+    </div>
+
+    <div class="report-footer">
+        <p>Generated by TPG Reports System</p>
+    </div>
+</body>
+</html>

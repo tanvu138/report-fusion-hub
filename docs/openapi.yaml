@@ -1,0 +1,2121 @@
+openapi: 3.0.3
+info:
+  title: TPG Reports API
+  version: v1.0.6
+  description: |
+    API for managing reports, templates, and user authentication for TPG Reports.
+    Uses HTTP-only cookies for authentication (not Bearer tokens).
+    Provides endpoints for creating, reading, updating, and deleting reports, departments, users, and templates, 
+    as well as managing the board reporting workflow including section submissions, report finalization, and PDF export.
+    
+    Authentication: All authenticated endpoints require HTTP-only cookies set by the /login endpoint.
+    Frontend requests must include { credentials: 'include' } option.
+
+servers:
+  - url: http://localhost:3001/api
+    description: Local development server
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+      description: |
+        HTTP-only JWT cookie set by the /login endpoint.
+        Frontend must use { credentials: 'include' } in fetch requests.
+        Cookie contains JWT token with 12-hour expiry.
+
+  schemas:
+    UserRoleEnum:
+      type: string
+      enum: [secretary, department]
+      description: Role of the user.
+
+    CreateUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Unique username for the user.
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          format: email
+          description: Email address of the user (must be unique).
+        password:
+          type: string
+          format: password
+          writeOnly: true
+          description: User's password. Min length 8.
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+        departmentId:
+          type: string
+          format: cuid
+          nullable: true
+          description: ID of the department the user belongs to (if applicable).
+      required:
+        - username
+        - name
+        - email
+        - password
+        - role
+
+    CreateTemplatePackRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the template pack.
+        description:
+          type: string
+          nullable: true
+          description: Optional description for the template pack.
+        templateIds:
+          type: array
+          items:
+            type: string
+            format: cuid
+          description: List of ReportTemplate IDs to include in this pack.
+      required:
+        - name
+        - templateIds
+
+    UpdateTemplatePackItemsRequest:
+      type: object
+      properties:
+        templateIds:
+          type: array
+          items:
+            type: string
+            format: cuid
+          description: An ordered list of ReportTemplate IDs for the pack.
+      required:
+        - templateIds
+
+    CreateReportFromPackRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title for the new report.
+        description:
+          type: string
+          nullable: true
+          description: Optional description for the report.
+        cycle:
+          type: string
+          enum: [WEEKLY, MONTHLY, ADHOC]
+          description: Reporting cycle for the report.
+        departmentIds:
+          type: array
+          items:
+            type: string
+            format: cuid
+          description: List of department IDs for the report.
+      required:
+        - title
+        - cycle
+        - departmentIds
+
+    UpdateTemplatePackRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: New name for the template pack.
+        description:
+          type: string
+          nullable: true
+          description: New description for the template pack.
+      minProperties: 1
+
+    TemplatePack:
+      type: object
+      properties:
+        id:
+          type: string
+          format: cuid
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        createdById:
+          type: string
+          format: cuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportTemplate' # Assuming ReportTemplate will be fully defined
+          description: The templates included in this pack.
+          # Or TemplatePackItem if we define that separately with displayOrder etc.
+      required:
+        - id
+        - name
+        - createdById
+        - createdAt
+        - updatedAt
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+        code:
+          type: string
+          description: An optional error code.
+      required:
+        - message
+
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Unique username for the user.
+          readOnly: true # Typically username is not changed after creation via this DTO
+        id:
+          type: string
+          format: cuid
+          description: Unique identifier for the user.
+          readOnly: true
+        name:
+          type: string
+          description: Name of the user.
+        email:
+          type: string
+          format: email
+          description: Email address of the user (unique).
+        role:
+          $ref: '#/components/schemas/UserRoleEnum'
+        departmentId:
+          type: string
+          format: cuid
+          nullable: true
+          description: ID of the department the user belongs to (if applicable).
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the user was created.
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the user was last updated.
+          readOnly: true
+      required:
+        - id
+        - name
+        - email
+        - role
+        - createdAt
+        - updatedAt
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email address.
+        password:
+          type: string
+          format: password
+          description: User's password.
+      required:
+        - email
+        - password
+
+    LoginResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+          description: JWT authentication token.
+      required:
+        - user
+        - token
+
+    CreateDepartmentRequest:
+      type: object
+      description: Data required to create a new department and its initial user.
+      properties:
+        name:
+          type: string
+          description: Name of the new department. Must be unique.
+        userEmailPrefix:
+          type: string
+          nullable: true
+          description: Optional prefix for the new department user's email (e.g., 'finance' for 'finance_user@example.com'). If not provided, derived from department name.
+        initialPassword:
+          type: string
+          format: password
+          writeOnly: true
+          nullable: true
+          description: Optional initial password for the new department user. If not provided, a secure password will be generated.
+      required:
+        - name
+
+    CreateDepartmentResponse:
+      type: object
+      description: Response after successfully creating a department and its user.
+      properties:
+        department:
+          $ref: '#/components/schemas/Department'
+        newUser:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email address of the newly created department user.
+            initialPassword:
+              type: string
+              description: The initial password for the new department user. This should be relayed securely and changed by the user on first login.
+          required:
+            - email
+            - initialPassword
+      required:
+        - department
+        - newUser # Always include newUser details on creation
+
+    UpdateDepartmentRequest:
+      type: object
+      description: Data for updating an existing department.
+      properties:
+        name:
+          type: string
+          description: New name for the department. Must be unique if provided.
+      # No required fields, as it's a PATCH-like update for the name
+
+    Department:
+      type: object
+      description: Represents an organizational department.
+      properties:
+        id:
+          type: string
+          format: cuid
+          readOnly: true
+          description: Unique identifier for the department.
+        name:
+          type: string
+          description: Name of the department. Should be unique.
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp of when the department was created.
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp of when the department was last updated.
+      required:
+        - id
+        - name
+        - createdAt
+        - updatedAt
+
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          format: cuid
+          readOnly: true
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        cycle:
+          type: string
+          enum: [WEEKLY, MONTHLY, ADHOC]
+        dueAt:
+          type: string
+          format: date-time
+          nullable: true
+        state:
+          type: string
+          enum: [DRAFT, FINAL, PUBLISHED]
+          default: DRAFT
+        finalizedAt:
+          type: string
+          format: date-time
+          nullable: true
+          readOnly: true
+        isDeleted:
+          type: boolean
+          default: false
+        templateId:
+          type: string
+          format: cuid
+          nullable: true
+          description: ID of the TemplatePack used as a blueprint to create this report, if any.
+        createdById:
+          type: string
+          format: cuid
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSection' # Assuming ReportSection will be fully defined
+          readOnly: true
+      required:
+        - id
+        - title
+        - cycle
+        - state
+        - createdById
+        - createdAt
+        - updatedAt
+
+    ReportSection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: cuid
+          readOnly: true
+        reportId:
+          type: string
+          format: cuid
+          readOnly: true
+        templateId:
+          type: string # This refers to SectionTemplate.id
+          format: cuid
+          readOnly: true
+        key:
+          type: string
+          description: Key from the SectionTemplate (e.g., 'achievements', 'challenges').
+          readOnly: true
+        displayName:
+          type: string
+          description: Display name from the SectionTemplate.
+          readOnly: true
+        departmentId:
+          type: string
+          format: cuid
+          nullable: true
+          readOnly: true
+          description: Department responsible for this section.
+        isActive:
+          type: boolean
+          default: true
+        contentMarkdown:
+          type: string
+          nullable: true
+          description: Markdown content of the section.
+        state:
+          type: string
+          enum: [DRAFT, SUBMITTED]
+          default: DRAFT
+          description: Current state of the section.
+        submittedAt:
+          type: string
+          format: date-time
+          nullable: true
+          readOnly: true
+        dueAt:
+          type: string
+          format: date-time
+          nullable: true
+        locked:
+          type: boolean
+          default: false
+          description: Whether the section is locked for editing.
+        displayOrder:
+          type: integer
+          description: Order in which the section appears in the report.
+        updatedById:
+          type: string
+          format: cuid
+          nullable: true
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - reportId
+        - templateId
+        - key
+        - displayName
+        - isActive
+        - state
+        - locked
+        - displayOrder
+        - updatedAt
+
+    ReportTemplate:
+      type: object
+      description: Represents a reusable section template for reports.
+      properties:
+        id:
+          type: string
+          format: cuid
+          readOnly: true
+          description: Unique identifier for the report template.
+        key:
+          type: string
+          description: A unique key for the template (e.g., 'introduction', 'financial_summary').
+        displayName:
+          type: string
+          description: A human-readable name for the template (e.g., 'Introduction', 'Financial Summary').
+        departmentId:
+          type: string
+          format: cuid
+          nullable: true
+          description: ID of the department this template is primarily for (if any).
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp of when the template was created.
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp of when the template was last updated.
+      required:
+        - id
+        - key
+        - displayName
+        - createdAt
+        - updatedAt
+
+
+    UpdateReportRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New title for the report.
+        description:
+          type: string
+          nullable: true
+          description: New description for the report.
+        cycle:
+          type: string
+          enum: [WEEKLY, MONTHLY, ADHOC]
+          description: New reporting cycle.
+        state:
+          type: string
+          enum: [DRAFT, FINAL, PUBLISHED]
+          description: New state for the report.
+        # departmentIds: # Usually not updated here, but through section management or initial creation
+        #   type: array
+        #   items:
+        #     type: string
+        #     format: cuid
+        dueAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: New due date for the report.
+      # No required fields, as it's a PATCH-like update
+
+    CreateReportRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the report.
+        cycle:
+          type: string
+          enum: [WEEKLY, MONTHLY, ADHOC]
+          description: Reporting cycle.
+        departmentIds:
+          type: array
+          items:
+            type: string
+            format: cuid
+          description: List of Department IDs to be included in this report for section creation.
+        description:
+          type: string
+          nullable: true
+          description: Optional description for the report.
+        # templateId: # This could be an optional field if creating from a specific template directly
+        #   type: string
+        #   format: cuid
+        #   nullable: true
+      required:
+        - title
+        - cycle
+        - departmentIds
+
+    UpdateSectionActiveStateRequest:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+          description: Whether the section should be active (included in the report).
+      required:
+        - isActive
+
+    SubmitSectionRequest:
+      type: object
+      properties:
+        contentMarkdown:
+          type: string
+          description: The markdown content for the section.
+      required:
+        - contentMarkdown
+
+
+
+
+    PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object # This will be replaced by specific schema like Report, Template, etc.
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+
+    SharedReportAccessEnum:
+      type: string
+      enum: [VIEW, COMMENT]
+      description: Access level for a shared report link.
+
+    CreateShareReportRequest:
+      type: object
+      properties:
+        accessLevel:
+          $ref: '#/components/schemas/SharedReportAccessEnum'
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Optional ISO timestamp when the link should expire.
+      required:
+        - accessLevel
+
+    ShareReportResponse:
+      type: object
+      properties:
+        shareId:
+          type: string
+          format: cuid
+        url:
+          type: string
+          format: uri
+        code:
+          type: string
+          description: One-time challenge code, returned only upon creation.
+      required:
+        - shareId
+        - url
+        - code
+
+    SharedReportLink:
+      type: object
+      properties:
+        id:
+          type: string
+          format: cuid
+        reportId:
+          type: string
+          format: cuid
+        accessLevel:
+          $ref: '#/components/schemas/SharedReportAccessEnum'
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdById:
+          type: string
+          format: cuid
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - reportId
+        - accessLevel
+        - createdById
+        - createdAt
+
+# Paths will be added in the next steps
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health Check
+      description: Returns the health status of the API.
+      responses:
+        '200':
+          description: API is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  timestamp:
+                    type: string
+                    format: date-time
+        '503':
+          description: API is unhealthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Unhealthy
+                  timestamp:
+                    type: string
+                    format: date-time
+                  details:
+                    type: object
+                    additionalProperties: true
+                    description: Optional details about the unhealthy state.
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: User Login
+      description: Authenticates a user and returns a JWT token along with user details.
+      requestBody:
+        description: User credentials for login.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful. Returns user object and JWT token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid request payload (e.g., missing email or password).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid email or password.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /me:
+    get:
+      tags:
+        - Authentication
+      summary: Get Current User Profile
+      description: Returns the profile of the currently authenticated user.
+      security:
+        - bearerAuth: [] # Indicates JWT Bearer token is required
+      responses:
+        '200':
+          description: Successfully retrieved user profile.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                required:
+                  - user
+        '401':
+          description: Unauthorized. Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /templates:
+    get:
+      tags:
+        - Templates
+      summary: List Templates
+      description: Retrieves a list of available templates, optionally paginated.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of templates per page.
+          schema:
+            type: integer
+            default: 10
+        # Add other potential filters if needed, e.g., createdBy, name contains, etc.
+      responses:
+        '200':
+          description: A paginated list of templates.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TemplatePack'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Templates
+      summary: Create Template
+      description: |
+        Creates a new template from a list of existing report template IDs.
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data for the new template.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTemplatePackRequest'
+      responses:
+        '201':
+          description: Template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplatePack'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /templates/{id}/items:
+    put:
+      tags:
+        - Templates
+      summary: Update Template Items
+      description: Replaces the list and order of templates within a specific template. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Template to update.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: An ordered list of template IDs for the template.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTemplatePackItemsRequest'
+      responses:
+        '200':
+          description: Template items updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplatePack'
+        '400':
+          description: Invalid request (e.g., empty list, invalid template IDs).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Template not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/from-template/{templateId}:
+    post:
+      tags:
+        - Reports
+      summary: Create Report from Template
+      description: Creates a new report based on the specified template.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          description: ID of the template to use.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: Data to create report from the template.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportFromPackRequest'
+      responses:
+        '201':
+          description: Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Template not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /templates/{id}:
+    put:
+      tags:
+        - Templates
+      summary: Update Template metadata
+      description: Updates name or description of a template. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the template to update.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: Fields to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTemplatePackRequest'
+      responses:
+        '200':
+          description: Template updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplatePack'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Template not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/finalize:
+    put:
+      tags:
+        - Reports
+      summary: Finalize Report
+      description: |
+        Marks a report as 'FINAL'. This typically locks sections and signifies the report is ready for publishing or export. 
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the report to finalize.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '200':
+          description: Report finalized successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid request (e.g., report not found or already finalized).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/export/pdf:
+    get:
+      tags:
+        - Reports
+      summary: Export Report as PDF
+      description: Exports the specified report as a PDF document using Puppeteer (headless Chrome) with encrypted image support.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the report to export.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '200':
+          description: PDF file of the report.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/sections/{sectionId}/submit:
+    put:
+      tags:
+        - Report Sections
+      summary: Submit a Report Section
+      description: |
+        Allows a department contributor to submit their section content. 
+        Sets the section state to 'SUBMITTED'.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Report.
+          schema:
+            type: string
+            format: cuid
+        - name: sectionId
+          in: path
+          required: true
+          description: ID of the ReportSection to submit.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: Section content to submit.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitSectionRequest'
+      responses:
+        '200':
+          description: Section submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSection'
+        '400':
+          description: Invalid request (e.g., section not found, report not in correct state, or content missing).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User may not have permission to submit this section or section is locked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report or Section not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports:
+    get:
+      tags:
+        - Reports
+      summary: List Reports
+      description: Retrieves a list of reports, with optional pagination and filtering.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of reports per page.
+          schema:
+            type: integer
+            default: 10
+        - name: state
+          in: query
+          description: Filter reports by state.
+          schema:
+            type: string
+            enum: [DRAFT, FINAL, PUBLISHED]
+        - name: cycle
+          in: query
+          description: Filter reports by cycle.
+          schema:
+            type: string
+            enum: [WEEKLY, MONTHLY, ADHOC]
+        - name: sortBy
+          in: query
+          description: Field to sort by (e.g., createdAt, title).
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          description: Sort order.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+        - name: search
+          in: query
+          description: Search term across title or description.
+          schema:
+            type: string
+        - name: departmentId
+          in: query
+          description: Filter reports by department.
+          schema:
+            type: string
+            format: cuid
+        # Add other potential filters like departmentId, createdById, etc.
+      responses:
+        '200':
+          description: A paginated list of reports.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Reports
+      summary: Create Report
+      description: |
+        Creates a new report, typically for ad-hoc reports or those not based on a template pack.
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data for the new report.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportRequest'
+      responses:
+        '201':
+          description: Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}:
+    get:
+      tags:
+        - Reports
+      summary: Get Report by ID
+      description: Retrieves full details of a specific report, including its sections.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the report to retrieve.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '200':
+          description: Successfully retrieved report details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have access to this report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Reports
+      summary: Update Report
+      description: |
+        Updates the metadata of an existing report (e.g., title, description, cycle, state, dueAt). 
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the report to update.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: Data to update for the report. All fields are optional.
+        required: true # Even if fields are optional, body is expected
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReportRequest'
+      responses:
+        '200':
+          description: Report updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/sections:
+    get:
+      tags:
+        - Report Sections
+      summary: List Sections for a Report
+      description: Retrieves a list of sections for a specific report that are visible to the authenticated user.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the report whose sections are to be retrieved.
+          schema:
+            type: string
+            format: cuid
+        # Optional query parameters for filtering sections (e.g., state, assignedToMe)
+        - name: state
+          in: query
+          description: Filter sections by state (e.g., PENDING, SUBMITTED, APPROVED).
+          schema:
+            type: string
+            enum: [DRAFT, SUBMITTED]
+        # - name: assignedToMe # Example for a boolean filter
+        #   in: query
+        #   description: Filter sections assigned to the current user.
+        #   schema:
+        #     type: boolean
+      responses:
+        '200':
+          description: Successfully retrieved report sections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportSection'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/sections/{sectionId}:
+    put:
+      tags:
+        - Report Sections
+      summary: Update Section Content
+      description: |
+        Allows a department contributor to update the markdown content of their assigned section. 
+        The section must not be locked.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Report.
+          schema:
+            type: string
+            format: cuid
+        - name: sectionId
+          in: path
+          required: true
+          description: ID of the ReportSection to update.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: New markdown content for the section.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitSectionRequest' # Reusing for content update
+      responses:
+        '200':
+          description: Section content updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSection'
+        '400':
+          description: Invalid request (e.g., content missing, section locked).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User may not have permission or section is locked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report or Section not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{id}/sections/{sectionId}/active:
+    patch:
+      tags:
+        - Report Sections
+      summary: Toggle Section Active State
+      description: |
+        Allows a secretary to toggle the 'isActive' state of a report section (i.e., include or exclude it from the report).
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Report.
+          schema:
+            type: string
+            format: cuid
+        - name: sectionId
+          in: path
+          required: true
+          description: ID of the ReportSection whose active state is to be toggled.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: New active state for the section.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSectionActiveStateRequest'
+      responses:
+        '200':
+          description: Section active state updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSection'
+        '400':
+          description: Invalid request payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report or Section not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /logout:
+    post:
+      tags:
+        - Authentication
+      summary: User Logout
+      description: Logs out the current user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Logout successful. Client should clear the token.
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users:
+    post:
+      tags:
+        - Users
+      summary: Create User
+      description: |
+        Creates a new user.
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Data for the new user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request payload (e.g., validation error, username/email exists).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - Users
+      summary: List Users
+      description: Retrieves a list of users, with optional pagination and filtering. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of users per page.
+          schema:
+            type: integer
+            default: 10
+        - name: sortBy
+          in: query
+          description: Field to sort by (e.g., name, email, createdAt, username).
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          description: Sort order.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+        - name: search
+          in: query
+          description: Search term for username, name or email.
+          schema:
+            type: string
+        - name: role
+          in: query
+          description: Filter by user role.
+          schema:
+            $ref: '#/components/schemas/UserRoleEnum'
+        - name: departmentId
+          in: query
+          description: Filter by department ID.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '200':
+          description: A paginated list of users.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /departments:
+    post:
+      tags:
+        - Departments
+      summary: Create Department and Associated User
+      description: |
+        Creates a new department and an associated user account for that department with the 'department' role.
+        Requires 'secretary' role.
+        The initial password for the new user is returned for one-time relay.
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Department creation data.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDepartmentRequest'
+      responses:
+        '201':
+          description: Department and user created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDepartmentResponse'
+        '400':
+          description: Invalid request (e.g., validation error, department name/email prefix already exists).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - Departments
+      summary: List Departments
+      description: |
+        Retrieves a list of all departments.
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of departments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /departments/{departmentId}:
+    get:
+      tags:
+        - Departments
+      summary: Get Department by ID
+      description: |
+        Retrieves details for a specific department.
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: departmentId
+          in: path
+          required: true
+          description: ID of the department to retrieve.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '200':
+          description: Department details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Department not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Departments
+      summary: Update Department
+      description: |
+        Updates the details of an existing department (e.g., its name).
+        Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: departmentId
+          in: path
+          required: true
+          description: ID of the department to update.
+          schema:
+            type: string
+            format: cuid
+      requestBody:
+        description: Data to update for the department.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDepartmentRequest'
+      responses:
+        '200':
+          description: Department updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+        '400':
+          description: Invalid request (e.g., validation error, name already exists).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Department not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Departments
+      summary: Delete Department
+      description: |
+        Deletes a department.
+        Requires 'secretary' role.
+        Deletion may be prevented if the department has associated active users or templates.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: departmentId
+          in: path
+          required: true
+          description: ID of the department to delete.
+          schema:
+            type: string
+            format: cuid
+      responses:
+        '204':
+          description: Department deleted successfully.
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Department not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict. Department cannot be deleted (e.g., due to active users or templates).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /shared-reports/{shareId}:
+    delete:
+      tags:
+        - Reports
+      summary: Revoke Share Link
+      description: Deletes an existing shared-report link. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: shareId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: cuid
+          description: ID of the share link to revoke.
+      responses:
+        '204':
+          description: Share link revoked.
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Share link not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /shared-reports/{shareId}/regenerate-code:
+    put:
+      tags:
+        - Reports
+      summary: Regenerate Share Link Code
+      description: Generates a new access code for an existing shared report link. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: shareId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: cuid
+          description: ID of the share link to regenerate code for.
+      responses:
+        '200':
+          description: New access code generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareReportResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden. User does not have 'secretary' role.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Share link not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{reportId}/share:
+    post:
+      tags:
+        - Reports
+      summary: Create Share Link
+      description: Generates an external share link for a snapshot of the specified report. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: cuid
+          description: ID of the report to share.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShareReportRequest'
+      responses:
+        '201':
+          description: Share link created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareReportResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reports/{reportId}/shared-links:
+    get:
+      tags:
+        - Reports
+      summary: List Share Links
+      description: Returns all share links created for the specified report. Requires 'secretary' role.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: reportId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: cuid
+          description: ID of the report.
+      responses:
+        '200':
+          description: List of share links.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedReportLink'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Report not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /public/shared-reports/{shareId}:
+    get:
+      tags:
+        - Public
+      summary: View Shared Report
+      description: Retrieves the snapshot of a shared report. Requires the challenge code via `X-Code` header.
+      parameters:
+        - name: shareId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: cuid
+          description: ID of the share link.
+        - name: X-Code
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Challenge code provided by the owner.
+      responses:
+        '200':
+          description: Snapshot of the report.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Invalid or missing code.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Share link not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '410':
+          description: Link expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

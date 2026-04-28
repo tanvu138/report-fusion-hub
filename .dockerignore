@@ -1,0 +1,16 @@
+node_modules
+server/node_modules
+dist
+coverage
+.git
+.env
+.env.local
+.claude
+.opencode
+plans
+docs
+tests
+*.md
+.husky
+.github
+.vscode
